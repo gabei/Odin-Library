@@ -36,4 +36,5 @@ body {
 .add-book-form__container {
   background: #fff;
   padding: 30px;
+  border-radius: 5px;
 }
