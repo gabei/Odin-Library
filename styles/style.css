@@ -1,0 +1,39 @@
+/*** omitted on behalf of Bulma css
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  border:
+}
+***/
+
+/* Colors
+_________________________*/
+
+/* end colors */
+
+html {
+}
+
+body {
+}
+
+.book-buttons button {
+  margin-bottom: 5px;
+}
+
+.book-modal {
+  display: none;
+  visibility: hidden;
+}
+
+.show-modal {
+  display: block;
+  visibility: visible;
+}
+
+.add-book-form__container {
+  background: #fff;
+  padding: 30px;
+}
