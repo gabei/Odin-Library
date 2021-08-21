@@ -38,3 +38,7 @@ body {
   padding: 30px;
   border-radius: 5px;
 }
+
+.add-book-form__form textarea {
+  resize: none;
+}
