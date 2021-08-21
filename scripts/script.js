@@ -72,6 +72,7 @@ const closeModal = document.querySelector(".close-modal");
 const modalBackground = document.querySelector(".modal-background");
 const bookModal = document.querySelector(".book-modal");
 const addBook = document.querySelector(".add-book");
+const addBookForm = document.querySelector(".add-book-form__form");
 
 openModal.addEventListener("click", showModal);
 closeModal.addEventListener("click", hideModal);
@@ -84,3 +85,12 @@ function showModal() {
 function hideModal() {
   bookModal.classList.remove("show-modal");
 }
+
+/* Add Book Form Functions
+___________________________________________*/
+addBookForm.addEventListener("submit", function (e) {
+  [...addBookForm.elements].forEach((ele) => {
+    console.log(ele.value);
+  });
+  e.preventDefault();
+});
