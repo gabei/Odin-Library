@@ -32,7 +32,7 @@ function numberIsTaken(id) {
 
 /* Book Object
 ___________________________________________*/
-function Book(title, author, pages) {
+function Book(title, author, description, pages, imageURL) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -89,8 +89,15 @@ function hideModal() {
 /* Add Book Form Functions
 ___________________________________________*/
 addBookForm.addEventListener("submit", function (e) {
-  [...addBookForm.elements].forEach((ele) => {
-    console.log(ele.value);
-  });
+  let inputs = [...addBookForm.elements];
+  let title = inputs[0].value;
+  let author = inputs[1].value;
+  let description = inputs[2].value;
+  let pages = inputs[3].value;
+  let imageURL = inputs[4].value;
+
+  let newBook = new Book(title, author, description, pages, imageURL);
+  addBookToLibrary(newBook);
+
   e.preventDefault();
 });
