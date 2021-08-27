@@ -99,5 +99,6 @@ addBookForm.addEventListener("submit", function (e) {
   let newBook = new Book(title, author, description, pages, imageURL);
   addBookToLibrary(newBook);
 
+  hideModal();
   e.preventDefault();
 });
