@@ -35,7 +35,9 @@ ___________________________________________*/
 function Book(title, author, description, pages, imageURL) {
   this.title = title;
   this.author = author;
+  this.description = description;
   this.pages = pages;
+  this.imageURL = imageURL;
   this.id = generateID();
   this.readStatus = false;
 }
@@ -99,6 +101,87 @@ addBookForm.addEventListener("submit", function (e) {
   let newBook = new Book(title, author, description, pages, imageURL);
   addBookToLibrary(newBook);
 
+  let bookData = {
+    title,
+    author,
+    description,
+    pages,
+    imageURL,
+  };
+
+  createBookCard(bookData);
+
   hideModal();
   e.preventDefault();
 });
+
+/* DOM Updates
+___________________________________________*/
+/*
+A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards, i.e., div.column > div.card etc...
+*/
+
+const cardContainer = document.querySelector(".card-container");
+
+function createBookCard(bookData) {
+  let column = document.createElement("div");
+  let bookCard = document.createElement("div");
+  let cardContent = document.createElement("div");
+  let title = document.createElement("p");
+  let author = document.createElement("p");
+  let content = document.createElement("div");
+  let description = document.createElement("p");
+  let buttons = document.createElement("ul");
+
+  column.classList.add(...getBookCardClass("column"));
+  bookCard.classList.add(...getBookCardClass("bookCard"));
+  cardContent.classList.add(...getBookCardClass("cardContent"));
+  title.classList.add(...getBookCardClass("title"));
+  author.classList.add(...getBookCardClass("author"));
+  content.classList.add(...getBookCardClass("content"));
+  description.classList.add(...getBookCardClass("description"));
+  buttons.classList.add(...getBookCardClass("buttons"));
+
+  title.textContent = bookData.title;
+  author.textContent = bookData.author;
+  description.textContent = bookData.description;
+
+  column.append(bookCard);
+  bookCard.append(cardContent);
+  cardContent.append(title, author, content, buttons);
+  content.append(description);
+  cardContainer.append(column);
+
+  return;
+}
+
+function getBookCardClass(element) {
+  let classes;
+
+  switch (element) {
+    case "column":
+      classes = ["column"];
+      break;
+    case "bookCard":
+      classes = ["book", "card"];
+      break;
+    case "cardContent":
+      classes = ["card-content"];
+      break;
+    case "title":
+      classes = ["title", "is-4"];
+      break;
+    case "author":
+      classes = ["subtitle", "is-6"];
+      break;
+    case "content":
+      classes = ["content"];
+      break;
+    case "buttons":
+      classes = ["book-buttons"];
+    default:
+      classes = [];
+      break;
+  }
+  return classes;
+}
