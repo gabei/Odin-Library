@@ -129,6 +129,7 @@ function createBookCard(bookData) {
   let cardContent = document.createElement("div");
   let title = document.createElement("p");
   let author = document.createElement("p");
+  let image = document.createElement("img");
   let content = document.createElement("div");
   let description = document.createElement("p");
   let buttons = document.createElement("ul");
@@ -138,6 +139,7 @@ function createBookCard(bookData) {
   cardContent.classList.add(...getBookCardClass("cardContent"));
   title.classList.add(...getBookCardClass("title"));
   author.classList.add(...getBookCardClass("author"));
+  image.classList.add(...getBookCardClass("image"));
   content.classList.add(...getBookCardClass("content"));
   description.classList.add(...getBookCardClass("description"));
   buttons.classList.add(...getBookCardClass("buttons"));
@@ -145,10 +147,11 @@ function createBookCard(bookData) {
   title.textContent = bookData.title;
   author.textContent = bookData.author;
   description.textContent = bookData.description;
+  image.src = bookData.imageURL || "../assets/images/missing-cover.jpg";
 
   column.append(bookCard);
   bookCard.append(cardContent);
-  cardContent.append(title, author, content, buttons);
+  cardContent.append(image, title, author, content, buttons);
   content.append(description);
   cardContainer.append(column);
 
@@ -179,6 +182,9 @@ function getBookCardClass(element) {
       break;
     case "buttons":
       classes = ["book-buttons"];
+    case "image":
+      classes = ["image", "is-3by3"];
+      break;
     default:
       classes = [];
       break;
