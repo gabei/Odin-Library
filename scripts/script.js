@@ -124,18 +124,24 @@ A new card needs to be added when a book is added to the collection. It can foll
 const cardContainer = document.querySelector(".card-container");
 
 function createBookCard(bookData) {
-  let column = createDOMelement("div", ["column"]);
+  let column = createDOMelement("div", ["column", "is-one-third"]);
   let bookCard = createDOMelement("div", ["book", "card"]);
   let cardContent = createDOMelement("div", ["card-content"]);
   let title = createDOMelement("p", ["title", "is-4"]);
   let author = createDOMelement("p", ["subtitle", "is-6"]);
-  let image = document.createElement("img");
   let content = createDOMelement("div", ["content"]);
   let description = createDOMelement("p");
   let buttons = createDOMelement("ul", ["book-buttons"]);
 
   // image alternate text should be title of book
   let imageContainer = createDOMelement("figure", ["image", "is-3by4"]);
+  let image = createDOMelement("img");
+  let mediaContainer = createDOMelement("div", ["media"]);
+  let mediaLeftContainer = createDOMelement("div", ["media-left"]);
+
+  mediaContainer.append(mediaLeftContainer);
+  mediaLeftContainer.append(imageContainer, title, author);
+  imageContainer.append(image);
 
   title.textContent = bookData.title;
   author.textContent = bookData.author;
@@ -144,7 +150,7 @@ function createBookCard(bookData) {
 
   column.append(bookCard);
   bookCard.append(cardContent);
-  cardContent.append(image, title, author, content, buttons);
+  cardContent.append(mediaContainer, content, buttons);
   content.append(description);
   cardContainer.append(column);
 
