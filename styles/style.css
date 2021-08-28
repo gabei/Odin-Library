@@ -1,4 +1,5 @@
-/* reset */
+/* Reset
+________________________________*/
 *,
 *:before,
 *:after {
@@ -16,6 +17,8 @@ body {
   box-sizing: inherit;
 }
 
+/* Form: Add to Collection
+________________________________*/
 .book-modal {
   display: none;
   visibility: hidden;
@@ -34,4 +37,36 @@ body {
 
 .add-book-form__form textarea {
   resize: none;
+}
+
+/* Book Card
+________________________________*/
+.book-card {
+  display: grid;
+  grid-template-areas:
+    "image title title"
+    "image author author"
+    "description description description"
+    "description description description"
+    "buttons buttons buttons";
+}
+
+.book-card__image {
+  grid-area: image;
+}
+
+.book-card__title {
+  grid-area: title;
+}
+
+.book-card__author {
+  grid-area: author;
+}
+
+.book-card__description {
+  grid-area: description;
+}
+
+.book-card__buttons {
+  grid-area: button;
 }
