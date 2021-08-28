@@ -157,37 +157,3 @@ function createDOMelement(type = "div", classes = []) {
 
   return newElement;
 }
-
-function getBookCardClass(element) {
-  let classes;
-
-  switch (element) {
-    case "column":
-      classes = ["column"];
-      break;
-    case "bookCard":
-      classes = ["book", "card"];
-      break;
-    case "cardContent":
-      classes = ["card-content"];
-      break;
-    case "title":
-      classes = ["title", "is-4"];
-      break;
-    case "author":
-      classes = ["subtitle", "is-6"];
-      break;
-    case "content":
-      classes = ["content"];
-      break;
-    case "buttons":
-      classes = ["book-buttons"];
-    case "image":
-      classes = ["image", "is-3by3"];
-      break;
-    default:
-      classes = [];
-      break;
-  }
-  return classes;
-}
