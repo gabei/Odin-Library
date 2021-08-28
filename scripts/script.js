@@ -124,25 +124,18 @@ A new card needs to be added when a book is added to the collection. It can foll
 const cardContainer = document.querySelector(".card-container");
 
 function createBookCard(bookData) {
-  let column = document.createElement("div");
-  let bookCard = document.createElement("div");
-  let cardContent = document.createElement("div");
-  let title = document.createElement("p");
-  let author = document.createElement("p");
+  let column = createDOMelement("div", ["column"]);
+  let bookCard = createDOMelement("div", ["book", "card"]);
+  let cardContent = createDOMelement("div", ["card-content"]);
+  let title = createDOMelement("p", ["title", "is-4"]);
+  let author = createDOMelement("p", ["subtitle", "is-6"]);
   let image = document.createElement("img");
-  let content = document.createElement("div");
-  let description = document.createElement("p");
-  let buttons = document.createElement("ul");
+  let content = createDOMelement("div", ["content"]);
+  let description = createDOMelement("p");
+  let buttons = createDOMelement("ul", ["book-buttons"]);
 
-  column.classList.add(...getBookCardClass("column"));
-  bookCard.classList.add(...getBookCardClass("bookCard"));
-  cardContent.classList.add(...getBookCardClass("cardContent"));
-  title.classList.add(...getBookCardClass("title"));
-  author.classList.add(...getBookCardClass("author"));
-  image.classList.add(...getBookCardClass("image"));
-  content.classList.add(...getBookCardClass("content"));
-  description.classList.add(...getBookCardClass("description"));
-  buttons.classList.add(...getBookCardClass("buttons"));
+  // image alternate text should be title of book
+  let imageContainer = createDOMelement("figure", ["image", "is-3by4"]);
 
   title.textContent = bookData.title;
   author.textContent = bookData.author;
@@ -156,6 +149,13 @@ function createBookCard(bookData) {
   cardContainer.append(column);
 
   return;
+}
+
+function createDOMelement(type = "div", classes = []) {
+  let newElement = document.createElement(type);
+  newElement.classList.add(...classes);
+
+  return newElement;
 }
 
 function getBookCardClass(element) {
