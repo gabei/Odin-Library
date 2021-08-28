@@ -35,7 +35,9 @@ ___________________________________________*/
 function Book(title, author, description, pages, imageURL) {
   this.title = title;
   this.author = author;
+  this.description = description;
   this.pages = pages;
+  this.imageURL = imageURL;
   this.id = generateID();
   this.readStatus = false;
 }
@@ -99,6 +101,65 @@ addBookForm.addEventListener("submit", function (e) {
   let newBook = new Book(title, author, description, pages, imageURL);
   addBookToLibrary(newBook);
 
+  let bookData = {
+    title,
+    author,
+    description,
+    pages,
+    imageURL,
+  };
+
+  createBookCard(bookData);
+
   hideModal();
   e.preventDefault();
 });
+
+/* DOM Updates
+___________________________________________*/
+/*
+A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards, i.e., div.column > div.card etc...
+*/
+
+const cardContainer = document.querySelector(".card-container");
+
+function createBookCard(bookData) {
+  let column = createDOMelement("div", ["column", "is-one-third"]);
+  let bookCard = createDOMelement("div", ["book", "card"]);
+  let cardContent = createDOMelement("div", ["card-content"]);
+  let title = createDOMelement("p", ["title", "is-4"]);
+  let author = createDOMelement("p", ["subtitle", "is-6"]);
+  let content = createDOMelement("div", ["content"]);
+  let description = createDOMelement("p");
+  let buttons = createDOMelement("ul", ["book-buttons"]);
+
+  // image alternate text should be title of book
+  let imageContainer = createDOMelement("figure", ["image", "is-3by4"]);
+  let image = createDOMelement("img");
+  let mediaContainer = createDOMelement("div", ["media"]);
+  let mediaLeftContainer = createDOMelement("div", ["media-left"]);
+
+  mediaContainer.append(mediaLeftContainer);
+  mediaLeftContainer.append(imageContainer, title, author);
+  imageContainer.append(image);
+
+  title.textContent = bookData.title;
+  author.textContent = bookData.author;
+  description.textContent = bookData.description;
+  image.src = bookData.imageURL || "../assets/images/missing-cover.jpg";
+
+  column.append(bookCard);
+  bookCard.append(cardContent);
+  cardContent.append(mediaContainer, content, buttons);
+  content.append(description);
+  cardContainer.append(column);
+
+  return;
+}
+
+function createDOMelement(type = "div", classes = []) {
+  let newElement = document.createElement(type);
+  newElement.classList.add(...classes);
+
+  return newElement;
+}
