@@ -39,20 +39,29 @@ ________________________________*/
   resize: none;
 }
 
-/* Book Card
+/* Book Card and Container
 ________________________________*/
+.book-container {
+  display: flex;
+}
+
 .book-card {
   display: grid;
   grid-template-areas:
-    "image title title"
-    "image author author"
-    "description description description"
-    "description description description"
-    "buttons buttons buttons";
+    "image title title title"
+    "image author author author"
+    "description description description description"
+    "description description description description"
+    "buttons buttons buttons buttons";
 }
 
 .book-card__image {
   grid-area: image;
+}
+
+.book-card__image img {
+  max-width: 100px;
+  height: auto;
 }
 
 .book-card__title {
@@ -69,4 +78,8 @@ ________________________________*/
 
 .book-card__buttons {
   grid-area: button;
+}
+
+.book-card__buttons li {
+  display: inline-block;
 }
