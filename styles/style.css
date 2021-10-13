@@ -43,6 +43,7 @@ ________________________________*/
 ________________________________*/
 .book-container {
   display: flex;
+  padding: 2rem 5rem;
 }
 
 .book-card {
@@ -53,6 +54,7 @@ ________________________________*/
     "description description description description"
     "description description description description"
     "buttons buttons buttons buttons";
+  padding: 2rem;
 }
 
 .book-card__image {
