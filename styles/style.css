@@ -1,3 +1,17 @@
+/* Variables
+________________________________*/
+:root {
+  --color-blue-dark: #a7bed3;
+  --color-blue-light: #c6e2e9;
+  --color-red-dark: #cc5a71;
+  --color-red-light: #ffcaaf;
+  --color-grey-dark: #31393c;
+  --color-grey-mid: #9b9fb5;
+  --color-grey-light: #c7c7cc;
+  --color-off-white: #fffaff;
+  --color-white: #ffffff;
+}
+
 /* Reset
 ________________________________*/
 *,
@@ -15,6 +29,13 @@ html {
 body {
   font-size: 1.6rem;
   box-sizing: inherit;
+  background: var(--color-blue-dark);
+}
+
+.main {
+  margin: 0 auto;
+  width: 95%;
+  background: var(--color-off-white);
 }
 
 /* Form: Add to Collection
