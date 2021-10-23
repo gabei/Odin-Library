@@ -52,6 +52,7 @@ ________________________________*/
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   padding: 2rem;
+  grid-gap: 1rem;
 }
 
 .book-card__image {
@@ -63,12 +64,18 @@ ________________________________*/
   height: auto;
 }
 
-.book-card__title {
+.book-card__info {
   grid-area: 1 / 2 / 1 / -1;
 }
 
-.book-card__author {
-  grid-area: 2 / 2 / 2 / -1;
+.book-card__info--title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.book-card__info--author {
+  font-size: 2rem;
+  color: #bbb;
 }
 
 .book-card__description {
