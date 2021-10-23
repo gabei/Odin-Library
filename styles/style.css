@@ -1,6 +1,7 @@
 /* Variables
 ________________________________*/
 :root {
+  /* Colors */
   --color-blue-dark: #a7bed3;
   --color-blue-light: #c6e2e9;
   --color-red-dark: #cc5a71;
@@ -10,6 +11,8 @@ ________________________________*/
   --color-grey-light: #c7c7cc;
   --color-off-white: #fffaff;
   --color-white: #ffffff;
+  /* Timings */
+  --default-transition: 0.2s;
 }
 
 /* Reset
@@ -29,7 +32,7 @@ html {
 body {
   font-size: 1.6rem;
   box-sizing: inherit;
-  background: var(--color-blue-dark);
+  background: var(--color-blue-light);
 }
 
 .main {
@@ -112,4 +115,27 @@ ________________________________*/
 
 .book-card__buttons li {
   display: inline-block;
+}
+
+/* Buttons
+________________________________*/
+.button {
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  color: var(--color-white);
+  transition: var(--default-transition);
+}
+
+.button:hover {
+  cursor: pointer;
+  box-shadow: 0px 1px 2px var(--color-grey-mid, 60%);
+}
+
+.button--add {
+  background-color: var(--color-blue-dark);
+}
+
+.button--remove {
+  background-color: var(--color-red-dark);
 }
