@@ -50,12 +50,17 @@ ________________________________*/
   visibility: hidden;
 }
 
+.book-modal__body {
+  padding: 1rem;
+  width: 100%;
+}
+
 .book-modal__title {
   margin-bottom: 2rem;
 }
 
 .book-modal .field {
-  margin-bottom: 2rem;
+  margin-top: 1.8rem;
 }
 
 .book-modal label {
