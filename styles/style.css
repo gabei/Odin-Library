@@ -6,6 +6,7 @@ ________________________________*/
   --color-blue-light: #c6e2e9;
   --color-red-dark: #cc5a71;
   --color-red-light: #ffcaaf;
+  --color-green-light: #aedcc0;
   --color-grey-dark: #31393c;
   --color-grey-mid: #9b9fb5;
   --color-grey-light: #c7c7cc;
@@ -133,9 +134,13 @@ ________________________________*/
 }
 
 .button--add {
-  background-color: var(--color-blue-dark);
+  background-color: var(--color-green-light);
 }
 
 .button--remove {
   background-color: var(--color-red-dark);
+}
+
+.button--info {
+  background-color: var(--color-blue-dark);
 }
