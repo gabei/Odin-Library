@@ -50,6 +50,26 @@ ________________________________*/
   visibility: hidden;
 }
 
+.book-modal__title {
+  margin-bottom: 2rem;
+}
+
+.book-modal .field {
+  margin-bottom: 2rem;
+}
+
+.book-modal label {
+  font-size: 1.8rem;
+}
+
+.book-modal input,
+.book-modal textarea {
+  padding: 1rem;
+  border: 1px solid var(--color-grey-light);
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
 .show-modal {
   display: block;
   visibility: visible;
