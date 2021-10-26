@@ -12,6 +12,7 @@ ________________________________*/
   --color-grey-light: #c7c7cc;
   --color-off-white: #fffaff;
   --color-white: #ffffff;
+  --modal-background: rgba(49, 57, 60, 0.8);
   /* Timings */
   --default-transition: 0.2s;
 }
@@ -58,10 +59,25 @@ ________________________________*/
   background: #fff;
   padding: 30px;
   border-radius: 5px;
+  width: 80%;
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .add-book-form__form textarea {
   resize: none;
+}
+
+.modal-background {
+  top: 0;
+  background-color: var(--modal-background);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 
 /* Book Card and Container
