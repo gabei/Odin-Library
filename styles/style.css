@@ -12,6 +12,7 @@ ________________________________*/
   --color-grey-light: #c7c7cc;
   --color-off-white: #fffaff;
   --color-white: #ffffff;
+  --modal-background: rgba(49, 57, 60, 0.8);
   /* Timings */
   --default-transition: 0.2s;
 }
@@ -49,6 +50,31 @@ ________________________________*/
   visibility: hidden;
 }
 
+.book-modal__body {
+  padding: 1rem;
+  width: 100%;
+}
+
+.book-modal__title {
+  margin-bottom: 2rem;
+}
+
+.book-modal .field {
+  margin-top: 1.8rem;
+}
+
+.book-modal label {
+  font-size: 1.8rem;
+}
+
+.book-modal input,
+.book-modal textarea {
+  padding: 1rem;
+  border: 1px solid var(--color-grey-light);
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
 .show-modal {
   display: block;
   visibility: visible;
@@ -58,10 +84,25 @@ ________________________________*/
   background: #fff;
   padding: 30px;
   border-radius: 5px;
+  width: 80%;
+  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .add-book-form__form textarea {
   resize: none;
+}
+
+.modal-background {
+  top: 0;
+  background-color: var(--modal-background);
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
 }
 
 /* Book Card and Container
