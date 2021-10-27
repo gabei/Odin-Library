@@ -121,38 +121,30 @@ ___________________________________________*/
 A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards, i.e., div.column > div.card etc...
 */
 
-const cardContainer = document.querySelector(".card-container");
+const cardContainer = document.querySelector(".book-container");
 
 function createBookCard(bookData) {
-  let column = createDOMelement("div", ["column", "is-one-third"]);
-  let bookCard = createDOMelement("div", ["book", "card"]);
-  let cardContent = createDOMelement("div", ["card-content"]);
-  let title = createDOMelement("p", ["title", "is-4"]);
-  let author = createDOMelement("p", ["subtitle", "is-6"]);
-  let content = createDOMelement("div", ["content"]);
-  let description = createDOMelement("p");
+  let bookCard = createDOMelement("div", ["book-card"]);
+  let info = createDOMelement("div", ["book-card__info"]);
+  let title = createDOMelement("p", ["book-card__info--title"]);
+  let author = createDOMelement("p", ["book-card__info--author"]);
+  let description = createDOMelement("div", ["book-card__description"]);
   let buttons = createDOMelement("ul", ["book-buttons"]);
 
   // image alternate text should be title of book
-  let imageContainer = createDOMelement("figure", ["image", "is-3by4"]);
+  let imageContainer = createDOMelement("div", ["book-card__image"]);
   let image = createDOMelement("img");
-  let mediaContainer = createDOMelement("div", ["media"]);
-  let mediaLeftContainer = createDOMelement("div", ["media-left"]);
 
-  mediaContainer.append(mediaLeftContainer);
-  mediaLeftContainer.append(imageContainer, title, author);
+  info.append(title, author);
   imageContainer.append(image);
+  bookCard.append(imageContainer, info, description, buttons);
 
   title.textContent = bookData.title;
   author.textContent = bookData.author;
   description.textContent = bookData.description;
   image.src = bookData.imageURL || "../assets/images/missing-cover.jpg";
 
-  column.append(bookCard);
-  bookCard.append(cardContent);
-  cardContent.append(mediaContainer, content, buttons);
-  content.append(description);
-  cardContainer.append(column);
+  cardContainer.append(bookCard);
 
   return;
 }
