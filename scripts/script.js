@@ -130,15 +130,23 @@ function createBookCard(bookData) {
   let author = createDOMelement("p", ["book-card__info--author"]);
   let description = createDOMelement("div", ["book-card__description"]);
   let buttons = createDOMelement("div", ["book-card__buttons"]);
-  let addButton = createDOMelement("button", ["button", "button--add"]);
-  let removeButton = createDOMelement("button", ["button", "button--remove"]);
-  let infoButton = createDOMelement("button", ["button", "button--info"]);
   let imageContainer = createDOMelement("div", ["book-card__image"]);
   let image = createDOMelement("img");
-
-  addButton.textContent = "Press Me";
-  removeButton.textContent = "Press Me";
-  infoButton.textContent = "Press Me";
+  let addButton = createDOMelement(
+    "button",
+    ["button", "button--add"],
+    "Press Me"
+  );
+  let removeButton = createDOMelement(
+    "button",
+    ["button", "button--remove"],
+    "Press Me"
+  );
+  let infoButton = createDOMelement(
+    "button",
+    ["button", "button--info"],
+    "Press Me"
+  );
 
   title.textContent = bookData.title;
   author.textContent = bookData.author;
@@ -154,9 +162,11 @@ function createBookCard(bookData) {
   return;
 }
 
-function createDOMelement(type = "div", classes = []) {
+function createDOMelement(type = "div", classes = [], text = "") {
   let newElement = document.createElement(type);
   newElement.classList.add(...classes);
+
+  if (type === "button") newElement.textContent = text;
 
   return newElement;
 }
