@@ -40,6 +40,7 @@ function Book(title, author, description, pages, imageURL) {
   this.imageURL = imageURL;
   this.id = generateID();
   this.readStatus = false;
+  this.stackID = myLibrary.length;
 }
 
 Book.prototype.info = function () {
