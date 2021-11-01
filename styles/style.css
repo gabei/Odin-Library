@@ -16,6 +16,9 @@ ________________________________*/
   --card-background: rgba(155, 159, 181, 0.3);
   /* Timings */
   --default-transition: 0.2s;
+  /* Spacing */
+  --page-width-percent: 95%;
+  --margin-center: 0 auto;
 }
 
 /* Reset
@@ -39,9 +42,17 @@ body {
 }
 
 .main {
-  margin: 0 auto;
-  width: 95%;
+  margin: var(--margin-center);
+  width: var(--page-width-percent);
   background: var(--color-off-white);
+}
+
+/* Top Banner
+________________________________*/
+.top-banner {
+  width: var(--page-width-percent);
+  margin: var(--margin-center);
+  padding: 2rem 0;
 }
 
 /* Form: Add to Collection
