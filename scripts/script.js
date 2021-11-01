@@ -118,7 +118,7 @@ addBookForm.addEventListener("submit", function (e) {
 /* DOM Updates
 ___________________________________________*/
 /*
-A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards, i.e., div.column > div.card etc...
+A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards: book-card__etc...
 */
 
 const cardContainer = document.querySelector(".book-container");
@@ -129,14 +129,21 @@ function createBookCard(bookData) {
   let title = createDOMelement("p", ["book-card__info--title"]);
   let author = createDOMelement("p", ["book-card__info--author"]);
   let description = createDOMelement("div", ["book-card__description"]);
-  let buttons = createDOMelement("ul", ["book-buttons"]);
+  let buttons = createDOMelement("div", ["book-card__buttons"]);
+  let addButton = createDOMelement("button", ["button", "button--add"]);
+  let removeButton = createDOMelement("button", ["button", "button--remove"]);
+  let infoButton = createDOMelement("button", ["button", "button--info"]);
 
   // image alternate text should be title of book
   let imageContainer = createDOMelement("div", ["book-card__image"]);
   let image = createDOMelement("img");
-
-  info.append(title, author);
   imageContainer.append(image);
+
+  addButton.textContent = "Press Me";
+  removeButton.textContent = "Press Me";
+  infoButton.textContent = "Press Me";
+  buttons.append(addButton, removeButton, infoButton);
+  info.append(title, author);
   bookCard.append(imageContainer, info, description, buttons);
 
   title.textContent = bookData.title;
