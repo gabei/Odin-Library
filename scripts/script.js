@@ -133,24 +133,22 @@ function createBookCard(bookData) {
   let addButton = createDOMelement("button", ["button", "button--add"]);
   let removeButton = createDOMelement("button", ["button", "button--remove"]);
   let infoButton = createDOMelement("button", ["button", "button--info"]);
-
-  // image alternate text should be title of book
   let imageContainer = createDOMelement("div", ["book-card__image"]);
   let image = createDOMelement("img");
-  imageContainer.append(image);
 
   addButton.textContent = "Press Me";
   removeButton.textContent = "Press Me";
   infoButton.textContent = "Press Me";
-  buttons.append(addButton, removeButton, infoButton);
-  info.append(title, author);
-  bookCard.append(imageContainer, info, description, buttons);
 
   title.textContent = bookData.title;
   author.textContent = bookData.author;
   description.textContent = bookData.description;
   image.src = bookData.imageURL || "../assets/images/missing-cover.jpg";
 
+  imageContainer.append(image);
+  buttons.append(addButton, removeButton, infoButton);
+  info.append(title, author);
+  bookCard.append(imageContainer, info, description, buttons);
   cardContainer.append(bookCard);
 
   return;
