@@ -118,48 +118,55 @@ addBookForm.addEventListener("submit", function (e) {
 /* DOM Updates
 ___________________________________________*/
 /*
-A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards, i.e., div.column > div.card etc...
+A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards: book-card__etc...
 */
 
-const cardContainer = document.querySelector(".card-container");
+const cardContainer = document.querySelector(".book-container");
 
 function createBookCard(bookData) {
-  let column = createDOMelement("div", ["column", "is-one-third"]);
-  let bookCard = createDOMelement("div", ["book", "card"]);
-  let cardContent = createDOMelement("div", ["card-content"]);
-  let title = createDOMelement("p", ["title", "is-4"]);
-  let author = createDOMelement("p", ["subtitle", "is-6"]);
-  let content = createDOMelement("div", ["content"]);
-  let description = createDOMelement("p");
-  let buttons = createDOMelement("ul", ["book-buttons"]);
-
-  // image alternate text should be title of book
-  let imageContainer = createDOMelement("figure", ["image", "is-3by4"]);
+  let bookCard = createDOMelement("div", ["book-card"]);
+  let info = createDOMelement("div", ["book-card__info"]);
+  let title = createDOMelement("p", ["book-card__info--title"]);
+  let author = createDOMelement("p", ["book-card__info--author"]);
+  let description = createDOMelement("div", ["book-card__description"]);
+  let buttons = createDOMelement("div", ["book-card__buttons"]);
+  let imageContainer = createDOMelement("div", ["book-card__image"]);
   let image = createDOMelement("img");
-  let mediaContainer = createDOMelement("div", ["media"]);
-  let mediaLeftContainer = createDOMelement("div", ["media-left"]);
-
-  mediaContainer.append(mediaLeftContainer);
-  mediaLeftContainer.append(imageContainer, title, author);
-  imageContainer.append(image);
+  let addButton = createDOMelement(
+    "button",
+    ["button", "button--add"],
+    "Press Me"
+  );
+  let removeButton = createDOMelement(
+    "button",
+    ["button", "button--remove"],
+    "Press Me"
+  );
+  let infoButton = createDOMelement(
+    "button",
+    ["button", "button--info"],
+    "Press Me"
+  );
 
   title.textContent = bookData.title;
   author.textContent = bookData.author;
   description.textContent = bookData.description;
   image.src = bookData.imageURL || "../assets/images/missing-cover.jpg";
 
-  column.append(bookCard);
-  bookCard.append(cardContent);
-  cardContent.append(mediaContainer, content, buttons);
-  content.append(description);
-  cardContainer.append(column);
+  imageContainer.append(image);
+  buttons.append(addButton, removeButton, infoButton);
+  info.append(title, author);
+  bookCard.append(imageContainer, info, description, buttons);
+  cardContainer.append(bookCard);
 
   return;
 }
 
-function createDOMelement(type = "div", classes = []) {
+function createDOMelement(type = "div", classes = [], text = "") {
   let newElement = document.createElement(type);
   newElement.classList.add(...classes);
+
+  if (type === "button") newElement.textContent = text;
 
   return newElement;
 }
