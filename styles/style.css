@@ -77,6 +77,7 @@ ________________________________*/
 
 .book-modal label {
   font-size: 1.8rem;
+  display: block;
 }
 
 .book-modal input,
@@ -199,4 +200,14 @@ ________________________________*/
 
 .button--info {
   background-color: var(--color-blue-dark);
+}
+
+/* Modifiers
+________________________________*/
+.inline {
+  position: inline;
+}
+
+.inline-block {
+  position: inline-block;
 }
