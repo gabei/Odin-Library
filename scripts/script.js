@@ -9,6 +9,13 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+function removeBookFromLibrary(book) {
+  let indexToRemove = book.stackID;
+  let IDtoCompare = myLibrary[indexToRemove].id;
+  //check that the book ID matches the ID of the book at target index
+  IDtoCompare === book.id ? myLibrary.splice(indexToRemove, 1) : null;
+}
+
 function showLibrary() {
   for (let book of myLibrary) {
     console.log(book.info());
