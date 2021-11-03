@@ -176,3 +176,22 @@ function toggleReadStatus(book) {
     ? book.updateReadStatus(true)
     : book.updateReadStatus(false);
 }
+
+/*__________LOCAL STORAGE__________  */
+
+const DB = window["localStorage"];
+
+// variation on MDN's storage test function
+function storageIsAvailable() {
+  try {
+    DB.setItem("poweron", "selftest");
+    DB.getItem("poweron");
+    DB.removeItem("poweron");
+    return true;
+  } catch (error) {
+    console.error(error);
+    alert("Local Storage is not available");
+  }
+}
+
+if (storageIsAvailable()) console.log("Storage is available");
