@@ -144,7 +144,9 @@ function createBookCard(book) {
 
   readButton.addEventListener("click", () => {
     toggleReadStatus(book);
-    updateButtonText(book);
+    book.readStatus === false
+      ? (readButton.innerHTML = "Mark as Read")
+      : (readButton.innerHTML = "Mark as Unread");
   });
 
   title.textContent = book.title;
@@ -178,12 +180,4 @@ function toggleReadStatus(book) {
   book.readStatus === false
     ? book.updateReadStatus(true)
     : book.updateReadStatus(false);
-
-  console.log(`${book.title}: ${book.readStatus}`);
 }
-
-const updateButtonText = (book) => {
-  book.readStatus === false
-    ? (this.innerHTML = "Mark as Read")
-    : (this.innerHTML = "Mark as Unread");
-};
