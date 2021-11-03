@@ -148,13 +148,18 @@ function createBookCard(bookData) {
   let removeButton = createDOMelement(
     "button",
     ["button", "button--remove"],
-    "Press Me"
+    "Remove"
   );
   let infoButton = createDOMelement(
     "button",
     ["button", "button--info"],
     "Press Me"
   );
+
+  removeButton.addEventListener("click", () => {
+    removeBookFromDOM(bookCard);
+    removeBookFromLibrary(bookData.stackID);
+  });
 
   title.textContent = bookData.title;
   author.textContent = bookData.author;
@@ -177,4 +182,8 @@ function createDOMelement(type = "div", classes = [], text = "") {
   if (type === "button") newElement.textContent = text;
 
   return newElement;
+}
+
+function removeBookFromDOM(card) {
+  card.remove();
 }
