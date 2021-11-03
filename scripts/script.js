@@ -17,6 +17,7 @@ function removeBookFromLibrary(book) {
 }
 
 function showLibrary() {
+  if (myLibrary.length === 0) return [];
   for (let book of myLibrary) {
     console.log(book.info());
   }
@@ -130,15 +131,20 @@ function createBookCard(book) {
     ["button", "button--remove"],
     "Remove"
   );
-  let infoButton = createDOMelement(
+  let readButton = createDOMelement(
     "button",
     ["button", "button--info"],
-    "Press Me"
+    "Mark as Read"
   );
 
   removeButton.addEventListener("click", () => {
     removeBookFromDOM(bookCard);
     removeBookFromLibrary(book);
+  });
+
+  readButton.addEventListener("click", () => {
+    toggleReadStatus(book);
+    updateButtonText(book);
   });
 
   title.textContent = book.title;
@@ -147,7 +153,7 @@ function createBookCard(book) {
   image.src = book.imageURL || "../assets/images/missing-cover.jpg";
 
   imageContainer.append(image);
-  buttons.append(addButton, removeButton, infoButton);
+  buttons.append(addButton, removeButton, readButton);
   info.append(title, author);
   bookCard.append(imageContainer, info, description, buttons);
   cardContainer.append(bookCard);
@@ -167,3 +173,17 @@ function createDOMelement(type = "div", classes = [], text = "") {
 function removeBookFromDOM(card) {
   card.remove();
 }
+
+function toggleReadStatus(book) {
+  book.readStatus === false
+    ? book.updateReadStatus(true)
+    : book.updateReadStatus(false);
+
+  console.log(`${book.title}: ${book.readStatus}`);
+}
+
+const updateButtonText = (book) => {
+  book.readStatus === false
+    ? (this.innerHTML = "Mark as Read")
+    : (this.innerHTML = "Mark as Unread");
+};
