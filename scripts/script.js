@@ -167,15 +167,3 @@ function createDOMelement(type = "div", classes = [], text = "") {
 function removeBookFromDOM(card) {
   card.remove();
 }
-
-/* Testing
-___________________________________________*/
-let harryPotter = new Book("Harry Potter", "J.K Rowling", 300);
-let webster = new Book("Webster's Original Dictionary", "Webster", 700);
-let circe = new Book("Circe", "Madeline Miller", 400);
-let adventureZone = new Book("Adventure Zone", "Clint McElroy", 156);
-addBookToLibrary(harryPotter);
-addBookToLibrary(webster);
-addBookToLibrary(circe);
-addBookToLibrary(adventureZone);
-showLibrary();
