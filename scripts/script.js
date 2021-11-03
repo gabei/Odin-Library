@@ -63,18 +63,6 @@ Book.prototype.updateReadStatus = function (status) {
   this.readStatus = status;
 };
 
-/* Testing
-___________________________________________*/
-let harryPotter = new Book("Harry Potter", "J.K Rowling", 300);
-let webster = new Book("Webster's Original Dictionary", "Webster", 700);
-let circe = new Book("Circe", "Madeline Miller", 400);
-let adventureZone = new Book("Adventure Zone", "Clint McElroy", 156);
-addBookToLibrary(harryPotter);
-addBookToLibrary(webster);
-addBookToLibrary(circe);
-addBookToLibrary(adventureZone);
-showLibrary();
-
 /* DOM Interaction
 ___________________________________________*/
 const openModal = document.querySelector(".open-modal");
@@ -107,17 +95,9 @@ addBookForm.addEventListener("submit", function (e) {
   let imageURL = inputs[4].value;
 
   let newBook = new Book(title, author, description, pages, imageURL);
+
   addBookToLibrary(newBook);
-
-  let bookData = {
-    title,
-    author,
-    description,
-    pages,
-    imageURL,
-  };
-
-  createBookCard(bookData);
+  createBookCard(newBook);
 
   hideModal();
   e.preventDefault();
@@ -131,7 +111,7 @@ A new card needs to be added when a book is added to the collection. It can foll
 
 const cardContainer = document.querySelector(".book-container");
 
-function createBookCard(bookData) {
+function createBookCard(book) {
   let bookCard = createDOMelement("div", ["book-card"]);
   let info = createDOMelement("div", ["book-card__info"]);
   let title = createDOMelement("p", ["book-card__info--title"]);
@@ -158,13 +138,13 @@ function createBookCard(bookData) {
 
   removeButton.addEventListener("click", () => {
     removeBookFromDOM(bookCard);
-    removeBookFromLibrary(bookData.stackID);
+    removeBookFromLibrary(book);
   });
 
-  title.textContent = bookData.title;
-  author.textContent = bookData.author;
-  description.textContent = bookData.description;
-  image.src = bookData.imageURL || "../assets/images/missing-cover.jpg";
+  title.textContent = book.title;
+  author.textContent = book.author;
+  description.textContent = book.description;
+  image.src = book.imageURL || "../assets/images/missing-cover.jpg";
 
   imageContainer.append(image);
   buttons.append(addButton, removeButton, infoButton);
@@ -187,3 +167,15 @@ function createDOMelement(type = "div", classes = [], text = "") {
 function removeBookFromDOM(card) {
   card.remove();
 }
+
+/* Testing
+___________________________________________*/
+let harryPotter = new Book("Harry Potter", "J.K Rowling", 300);
+let webster = new Book("Webster's Original Dictionary", "Webster", 700);
+let circe = new Book("Circe", "Madeline Miller", 400);
+let adventureZone = new Book("Adventure Zone", "Clint McElroy", 156);
+addBookToLibrary(harryPotter);
+addBookToLibrary(webster);
+addBookToLibrary(circe);
+addBookToLibrary(adventureZone);
+showLibrary();
