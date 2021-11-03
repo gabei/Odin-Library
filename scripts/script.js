@@ -121,11 +121,6 @@ function createBookCard(book) {
   let buttons = createDOMelement("div", ["book-card__buttons"]);
   let imageContainer = createDOMelement("div", ["book-card__image"]);
   let image = createDOMelement("img");
-  let addButton = createDOMelement(
-    "button",
-    ["button", "button--add"],
-    "Press Me"
-  );
   let removeButton = createDOMelement(
     "button",
     ["button", "button--remove"],
@@ -155,7 +150,7 @@ function createBookCard(book) {
   image.src = book.imageURL || "../assets/images/missing-cover.jpg";
 
   imageContainer.append(image);
-  buttons.append(addButton, removeButton, readButton);
+  buttons.append(readButton, removeButton);
   info.append(title, author);
   bookCard.append(imageContainer, info, description, buttons);
   cardContainer.append(bookCard);
