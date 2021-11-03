@@ -183,7 +183,7 @@ function toggleReadStatus(book) {
 
 /*__________LOCAL STORAGE__________  */
 
-const DB = window["localStorage"];
+const DB = window.localStorage;
 
 // variation on MDN's storage test function
 function storageIsAvailable() {
@@ -191,6 +191,7 @@ function storageIsAvailable() {
     DB.setItem("poweron", "selftest");
     DB.getItem("poweron");
     DB.removeItem("poweron");
+    DB.clear();
     return true;
   } catch (error) {
     console.error(error);
