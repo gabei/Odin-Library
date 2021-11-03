@@ -7,13 +7,17 @@ const libraryIDnumbers = [];
 ___________________________________________*/
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  addToStorage(book);
 }
 
 function removeBookFromLibrary(book) {
   let indexToRemove = book.stackID;
   let IDtoCompare = myLibrary[indexToRemove].id;
   //check that the book ID matches the ID of the book at target index
-  IDtoCompare === book.id ? myLibrary.splice(indexToRemove, 1) : null;
+  if (IDtoCompare === book.id) {
+    myLibrary.splice(indexToRemove, 1);
+    removeBookFromLibrary(IDtoCompare);
+  }
 }
 
 function showLibrary() {
@@ -195,3 +199,12 @@ function storageIsAvailable() {
 }
 
 if (storageIsAvailable()) console.log("Storage is available");
+
+function addToStorage(book) {
+  let bookJSON = JSON.stringify(book);
+  DB.setItem(book.id, bookJSON);
+}
+
+function removeFromStorage(book) {
+  DB.removeItem(book.id);
+}
