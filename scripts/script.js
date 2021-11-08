@@ -1,13 +1,66 @@
+/*__________LOCAL STORAGE__________  */
+
+const DB = window.localStorage;
+
+// variation on MDN's storage test function
+function storageIsAvailable() {
+  try {
+    DB.setItem("poweron", "selftest");
+    DB.getItem("poweron");
+    DB.removeItem("poweron");
+    DB.clear();
+    return true;
+  } catch (error) {
+    console.error(error);
+    alert("Local Storage is not available");
+  }
+}
+
+if (storageIsAvailable()) console.log("Storage is available");
+
+function createStore() {
+  DB.setItem("myLibrary", myLibrary);
+}
+
+function updateStorage() {
+  DB.setItem("myLibrary", myLibrary);
+}
+
+function getAllFromStorage() {
+  let data = DB.getItem("myLibrary");
+  if (data) {
+    myLibrary = [...data];
+    return true;
+  } else {
+    console.log("no data to retreive");
+  }
+}
+
+function clearStorage() {
+  DB.clearStorage();
+}
+
+function tryStorage() {
+  try {
+    if (getAllFromStorage()) console.log("Storage retreived");
+  } catch (error) {
+    console.error(error);
+    createStore();
+    console.log("new storage created");
+  }
+}
+
 /* Data Structures
 ___________________________________________*/
 const myLibrary = [];
 const libraryIDnumbers = [];
+tryStorage();
 
 /* Data Functions
 ___________________________________________*/
 function addBookToLibrary(book) {
   myLibrary.push(book);
-  addToStorage(book);
+  updateStorage();
 }
 
 function removeBookFromLibrary(book) {
@@ -179,33 +232,4 @@ function toggleReadStatus(book) {
   book.readStatus === false
     ? book.updateReadStatus(true)
     : book.updateReadStatus(false);
-}
-
-/*__________LOCAL STORAGE__________  */
-
-const DB = window.localStorage;
-
-// variation on MDN's storage test function
-function storageIsAvailable() {
-  try {
-    DB.setItem("poweron", "selftest");
-    DB.getItem("poweron");
-    DB.removeItem("poweron");
-    DB.clear();
-    return true;
-  } catch (error) {
-    console.error(error);
-    alert("Local Storage is not available");
-  }
-}
-
-if (storageIsAvailable()) console.log("Storage is available");
-
-function addToStorage(book) {
-  let bookJSON = JSON.stringify(book);
-  DB.setItem(book.id, bookJSON);
-}
-
-function removeFromStorage(book) {
-  DB.removeItem(book.id);
 }
