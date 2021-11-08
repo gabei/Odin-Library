@@ -45,8 +45,8 @@ function tryStorage() {
     if (getAllFromStorage()) console.log("Storage retreived");
   } catch (error) {
     console.error(error);
-    createStore();
     console.log("new storage created");
+    createStore();
   }
 }
 
