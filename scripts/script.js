@@ -16,34 +16,35 @@ function storageIsAvailable() {
   }
 }
 
-if (storageIsAvailable()) console.log("Storage is available");
+if (storageIsAvailable()) console.log("Local storage is available");
 
 function createStore() {
   DB.setItem("myLibrary", myLibrary);
+  console.log("new storage created");
 }
 
 function updateStorage() {
-  DB.setItem("myLibrary", myLibrary);
+  DB.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
 function getAllFromStorage() {
-  let data = DB.getItem("myLibrary");
+  let data = JSON.parse(DB.getItem("myLibrary"));
   if (data) {
     myLibrary = [...data];
     return true;
   } else {
     console.log("no data to retreive");
+    createStore();
   }
 }
 
-function tryStorage() {
-  if (getAllFromStorage()) {
-    console.log("Storage retreived");
-    return 1;
-  }
-  console.log("new storage created");
-  createStore();
-}
+// function tryStorage() {
+//   if (getAllFromStorage()) {
+//     console.log("Storage retreived");
+//     return 1;
+//   }
+//   createStore();
+// }
 
 function clearStorage() {
   DB.clear();
@@ -53,7 +54,7 @@ function clearStorage() {
 ___________________________________________*/
 const myLibrary = [];
 const libraryIDnumbers = [];
-tryStorage();
+getAllFromStorage();
 
 /* Data Functions
 ___________________________________________*/
