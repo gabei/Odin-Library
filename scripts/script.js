@@ -27,24 +27,17 @@ function updateStorage() {
   DB.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
-function getAllFromStorage() {
+function tryStorage() {
   let data = JSON.parse(DB.getItem("myLibrary"));
+  console.log(data);
   if (data) {
-    myLibrary = [...data];
-    return true;
+    myLibrary.push(data);
+    console.log("storage retreived");
   } else {
     console.log("no data to retreive");
     createStore();
   }
 }
-
-// function tryStorage() {
-//   if (getAllFromStorage()) {
-//     console.log("Storage retreived");
-//     return 1;
-//   }
-//   createStore();
-// }
 
 function clearStorage() {
   DB.clear();
@@ -54,7 +47,7 @@ function clearStorage() {
 ___________________________________________*/
 const myLibrary = [];
 const libraryIDnumbers = [];
-getAllFromStorage();
+tryStorage();
 
 /* Data Functions
 ___________________________________________*/
