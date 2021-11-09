@@ -36,18 +36,17 @@ function getAllFromStorage() {
   }
 }
 
-function clearStorage() {
-  DB.clearStorage();
+function tryStorage() {
+  if (getAllFromStorage()) {
+    console.log("Storage retreived");
+    return 1;
+  }
+  console.log("new storage created");
+  createStore();
 }
 
-function tryStorage() {
-  try {
-    if (getAllFromStorage()) console.log("Storage retreived");
-  } catch (error) {
-    console.error(error);
-    console.log("new storage created");
-    createStore();
-  }
+function clearStorage() {
+  DB.clear();
 }
 
 /* Data Structures
