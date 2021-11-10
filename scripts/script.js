@@ -58,13 +58,10 @@ function addBookToLibrary(book) {
 }
 
 function removeBookFromLibrary(book) {
-  let indexToRemove = book.stackID;
-  let IDtoCompare = myLibrary[indexToRemove].id;
+  let indexToRemove = myLibrary.findIndex((x) => x.id === book.id);
   //check that the book ID matches the ID of the book at target index
-  if (IDtoCompare === book.id) {
-    myLibrary.splice(indexToRemove, 1);
-    removeBookFromLibrary(IDtoCompare);
-  }
+  myLibrary.splice(indexToRemove, 1);
+  updateLocalStorage();
 }
 
 function showLibrary() {
