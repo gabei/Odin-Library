@@ -1,14 +1,14 @@
-/*__________LOCAL STORAGE__________  */
+const cardContainer = document.querySelector(".book-container");
 
-const DB = window.localStorage;
+/*__________LOCAL STORAGE__________  */
 
 // variation on MDN's storage test function
 function storageIsAvailable() {
   try {
-    DB.setItem("poweron", "selftest");
-    DB.getItem("poweron");
-    DB.removeItem("poweron");
-    DB.clear();
+    localStorage.setItem("poweron", "selftest");
+    localStorage.getItem("poweron");
+    localStorage.removeItem("poweron");
+    localStorage.clear();
     return true;
   } catch (error) {
     console.error(error);
@@ -16,44 +16,45 @@ function storageIsAvailable() {
   }
 }
 
-if (storageIsAvailable()) console.log("Local storage is available");
-
-function createStore() {
-  DB.setItem("myLibrary", myLibrary);
-  console.log("new storage created");
+function initStorage() {
+  if (storageIsAvailable) {
+    console.log("Local storage is available.");
+    getLocalStorage();
+  }
 }
 
-function updateStorage() {
-  DB.setItem("myLibrary", JSON.stringify(myLibrary));
+function updateLocalStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
-function tryStorage() {
-  let data = JSON.parse(DB.getItem("myLibrary"));
-  console.log(data);
-  if (data) {
-    myLibrary.push(data);
-    console.log("storage retreived");
+function getLocalStorage() {
+  let books = JSON.parse(localStorage.getItem("myLibrary"));
+  console.log(books);
+  if (books) {
+    myLibrary = books.map((book) => book);
+    for (let book of myLibrary) {
+      createBookCard(book);
+    }
   } else {
-    console.log("no data to retreive");
-    createStore();
+    mylibrary = [];
   }
 }
 
 function clearStorage() {
-  DB.clear();
+  localStorage.clear();
 }
 
 /* Data Structures
 ___________________________________________*/
-const myLibrary = [];
-const libraryIDnumbers = [];
-tryStorage();
+let myLibrary = [];
+let libraryIDnumbers = [];
+initStorage();
 
 /* Data Functions
 ___________________________________________*/
 function addBookToLibrary(book) {
   myLibrary.push(book);
-  updateStorage();
+  updateLocalStorage();
 }
 
 function removeBookFromLibrary(book) {
@@ -160,8 +161,6 @@ ___________________________________________*/
 A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards: book-card__etc...
 */
 
-const cardContainer = document.querySelector(".book-container");
-
 function createBookCard(book) {
   let bookCard = createDOMelement("div", ["book-card"]);
   let info = createDOMelement("div", ["book-card__info"]);
@@ -204,6 +203,11 @@ function createBookCard(book) {
   info.append(title, author);
   bookCard.append(imageContainer, info, description, buttons);
   cardContainer.append(bookCard);
+
+  console.log(book);
+  console.log(book.title);
+  console.log(book.author);
+  console.log(book.description);
 
   return;
 }
