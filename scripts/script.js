@@ -113,6 +113,11 @@ A new card needs to be added when a book is added to the collection. It can foll
 
 //longest function of all time? :((
 function createBookCard(book) {
+  console.log(
+    Object.getOwnPropertyNames(book).filter(function (p) {
+      return typeof book[p] === "function";
+    })
+  );
   let bookCard = createDOMelement("div", ["book-card"]);
   let info = createDOMelement("div", ["book-card__info"]);
   let title = createDOMelement("p", ["book-card__info--title"]);
@@ -207,6 +212,7 @@ function updateLocalStorage() {
 function getLocalStorage() {
   let books = JSON.parse(localStorage.getItem("myLibrary"));
   if (books) {
+    //for each book. create a book object and add to library. this retains the functions required
     myLibrary = books.map((book) => book);
     for (let book of myLibrary) {
       console.log(book);
