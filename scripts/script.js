@@ -1,10 +1,7 @@
-const cardContainer = document.querySelector(".book-container");
-
-/* Data Structures
+/* Data Vars
 ___________________________________________*/
 let myLibrary = [];
 let libraryIDnumbers = [];
-initStorage();
 
 /* Data Functions
 ___________________________________________*/
@@ -68,8 +65,11 @@ Book.prototype.updateReadStatus = function (status) {
   this.readStatus = status;
 };
 
-/* DOM Interaction
+/* DOM Interaction Vars
 ___________________________________________*/
+//this must be initialized before data is pulled from storage
+const cardContainer = document.querySelector(".book-container");
+
 const openModal = document.querySelector(".open-modal");
 const closeModal = document.querySelector(".close-modal");
 const modalBackground = document.querySelector(".modal-background");
@@ -81,6 +81,8 @@ openModal.addEventListener("click", showModal);
 closeModal.addEventListener("click", hideModal);
 modalBackground.addEventListener("click", hideModal);
 
+/* DOM Interaction Functions
+___________________________________________*/
 function showModal() {
   bookModal.classList.add("show-modal");
 }
@@ -108,12 +110,13 @@ addBookForm.addEventListener("submit", function (e) {
   e.preventDefault();
 });
 
-/* DOM Updates
+/* DOM Updates -- Book Cards
 ___________________________________________*/
 /*
 A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards: book-card__etc...
 */
 
+//longest function of all time? :((
 function createBookCard(book) {
   let bookCard = createDOMelement("div", ["book-card"]);
   let info = createDOMelement("div", ["book-card__info"]);
@@ -211,6 +214,7 @@ function getLocalStorage() {
   if (books) {
     myLibrary = books.map((book) => book);
     for (let book of myLibrary) {
+      console.log(book);
       createBookCard(book);
     }
   } else {
@@ -221,3 +225,6 @@ function getLocalStorage() {
 function clearStorage() {
   localStorage.clear();
 }
+
+// Let's check storage on-pageload
+initStorage();
