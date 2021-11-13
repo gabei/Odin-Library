@@ -1,49 +1,5 @@
 const cardContainer = document.querySelector(".book-container");
 
-/*__________LOCAL STORAGE__________  */
-
-// variation on MDN's storage test function
-function storageIsAvailable() {
-  try {
-    localStorage.setItem("poweron", "selftest");
-    localStorage.getItem("poweron");
-    localStorage.removeItem("poweron");
-    localStorage.clear();
-    return true;
-  } catch (error) {
-    console.error(error);
-    alert("Local Storage is not available");
-  }
-}
-
-function initStorage() {
-  if (storageIsAvailable) {
-    console.log("Local storage is available.");
-    getLocalStorage();
-  }
-}
-
-function updateLocalStorage() {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-}
-
-function getLocalStorage() {
-  let books = JSON.parse(localStorage.getItem("myLibrary"));
-  console.log(books);
-  if (books) {
-    myLibrary = books.map((book) => book);
-    for (let book of myLibrary) {
-      createBookCard(book);
-    }
-  } else {
-    mylibrary = [];
-  }
-}
-
-function clearStorage() {
-  localStorage.clear();
-}
-
 /* Data Structures
 ___________________________________________*/
 let myLibrary = [];
@@ -201,11 +157,6 @@ function createBookCard(book) {
   bookCard.append(imageContainer, info, description, buttons);
   cardContainer.append(bookCard);
 
-  console.log(book);
-  console.log(book.title);
-  console.log(book.author);
-  console.log(book.description);
-
   return;
 }
 
@@ -226,4 +177,47 @@ function toggleReadStatus(book) {
   book.readStatus === false
     ? book.updateReadStatus(true)
     : book.updateReadStatus(false);
+}
+
+/*__________LOCAL STORAGE__________  */
+
+// variation on MDN's storage test function
+function storageIsAvailable() {
+  try {
+    localStorage.setItem("poweron", "selftest");
+    localStorage.getItem("poweron");
+    localStorage.removeItem("poweron");
+    localStorage.clear();
+    return true;
+  } catch (error) {
+    console.error(error);
+    console.log("Local Storage is not available");
+  }
+}
+
+function initStorage() {
+  if (storageIsAvailable) {
+    console.log("Local storage is available.");
+    getLocalStorage();
+  }
+}
+
+function updateLocalStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function getLocalStorage() {
+  let books = JSON.parse(localStorage.getItem("myLibrary"));
+  if (books) {
+    myLibrary = books.map((book) => book);
+    for (let book of myLibrary) {
+      createBookCard(book);
+    }
+  } else {
+    mylibrary = [];
+  }
+}
+
+function clearStorage() {
+  localStorage.clear();
 }
