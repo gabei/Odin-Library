@@ -1,19 +1,67 @@
+const cardContainer = document.querySelector(".book-container");
+
+/*__________LOCAL STORAGE__________  */
+
+// variation on MDN's storage test function
+function storageIsAvailable() {
+  try {
+    localStorage.setItem("poweron", "selftest");
+    localStorage.getItem("poweron");
+    localStorage.removeItem("poweron");
+    localStorage.clear();
+    return true;
+  } catch (error) {
+    console.error(error);
+    alert("Local Storage is not available");
+  }
+}
+
+function initStorage() {
+  if (storageIsAvailable) {
+    console.log("Local storage is available.");
+    getLocalStorage();
+  }
+}
+
+function updateLocalStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function getLocalStorage() {
+  let books = JSON.parse(localStorage.getItem("myLibrary"));
+  console.log(books);
+  if (books) {
+    myLibrary = books.map((book) => book);
+    for (let book of myLibrary) {
+      createBookCard(book);
+    }
+  } else {
+    mylibrary = [];
+  }
+}
+
+function clearStorage() {
+  localStorage.clear();
+}
+
 /* Data Structures
 ___________________________________________*/
-const myLibrary = [];
-const libraryIDnumbers = [];
+let myLibrary = [];
+let libraryIDnumbers = [];
+initStorage();
 
 /* Data Functions
 ___________________________________________*/
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  updateLocalStorage();
 }
 
 function removeBookFromLibrary(book) {
-  let indexToRemove = book.stackID;
-  let IDtoCompare = myLibrary[indexToRemove].id;
+  let indexToRemove = myLibrary.findIndex((x) => x.id === book.id);
   //check that the book ID matches the ID of the book at target index
-  IDtoCompare === book.id ? myLibrary.splice(indexToRemove, 1) : null;
+  myLibrary.splice(indexToRemove, 1);
+  updateLocalStorage();
 }
 
 function showLibrary() {
@@ -110,8 +158,6 @@ ___________________________________________*/
 A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards: book-card__etc...
 */
 
-const cardContainer = document.querySelector(".book-container");
-
 function createBookCard(book) {
   let bookCard = createDOMelement("div", ["book-card"]);
   let info = createDOMelement("div", ["book-card__info"]);
@@ -121,11 +167,6 @@ function createBookCard(book) {
   let buttons = createDOMelement("div", ["book-card__buttons"]);
   let imageContainer = createDOMelement("div", ["book-card__image"]);
   let image = createDOMelement("img");
-  let addButton = createDOMelement(
-    "button",
-    ["button", "button--add"],
-    "Press Me"
-  );
   let removeButton = createDOMelement(
     "button",
     ["button", "button--remove"],
@@ -155,10 +196,15 @@ function createBookCard(book) {
   image.src = book.imageURL || "../assets/images/missing-cover.jpg";
 
   imageContainer.append(image);
-  buttons.append(addButton, removeButton, readButton);
+  buttons.append(readButton, removeButton);
   info.append(title, author);
   bookCard.append(imageContainer, info, description, buttons);
   cardContainer.append(bookCard);
+
+  console.log(book);
+  console.log(book.title);
+  console.log(book.author);
+  console.log(book.description);
 
   return;
 }
