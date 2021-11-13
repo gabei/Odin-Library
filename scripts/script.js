@@ -50,20 +50,15 @@ function Book(title, author, description, pages, imageURL) {
   this.id = generateID();
   this.readStatus = false;
   this.stackID = myLibrary.length;
+
+  this.updateReadStatus = function (status) {
+    this.readStatus = status;
+  };
+
+  this.info = function () {
+    return `\"${this.title}\", by ${this.author}, ${this.pages} pages. ID: ${this.id}`;
+  };
 }
-
-Book.prototype.info = function () {
-  return `\"${this.title}\", by ${this.author}, ${this.pages} pages. ID: ${this.id}`;
-};
-
-Book.prototype.updateReadStatus = function (status) {
-  /***
-  A book's read status is either 
-  true = 'read' OR false = 'not read'.
-  It is false by default. 
-  ****/
-  this.readStatus = status;
-};
 
 /* DOM Interaction Vars
 ___________________________________________*/
