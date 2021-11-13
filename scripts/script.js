@@ -6,9 +6,7 @@ let libraryIDnumbers = [];
 /* Data Functions
 ___________________________________________*/
 function addBookToLibrary(book) {
-  let newBook = new Book(...book);
-  myLibrary.push(newBook);
-  createBookCard(newBook);
+  myLibrary.push(book);
   updateLocalStorage();
 }
 
@@ -17,13 +15,6 @@ function removeBookFromLibrary(book) {
   //check that the book ID matches the ID of the book at target index
   myLibrary.splice(indexToRemove, 1);
   updateLocalStorage();
-}
-
-function showLibrary() {
-  if (myLibrary.length === 0) return [];
-  for (let book of myLibrary) {
-    console.log(book.info());
-  }
 }
 
 function generateID() {
@@ -43,18 +34,19 @@ function numberIsTaken(id) {
 
 /* Book Object
 ___________________________________________*/
-function Book(title, author, description, pages, imageURL) {
+function Book(title, author, description, pages, imageURL, readStatus) {
   this.title = title;
   this.author = author;
   this.description = description;
   this.pages = pages;
   this.imageURL = imageURL;
   this.id = generateID();
-  this.readStatus = false;
+  this.readStatus = readStatus || false;
   this.stackID = myLibrary.length;
 
   this.updateReadStatus = function (status) {
     this.readStatus = status;
+    updateLocalStorage(myLibrary);
   };
 
   this.info = function () {
@@ -98,8 +90,10 @@ addBookForm.addEventListener("submit", function (e) {
   let pages = inputs[3].value;
   let imageURL = inputs[4].value;
 
-  let newBook = [title, author, description, pages, imageURL];
+  let newBook = new Book(title, author, description, pages, imageURL);
+
   addBookToLibrary(newBook);
+  createBookCard(newBook);
 
   hideModal();
   e.preventDefault();
@@ -113,11 +107,6 @@ A new card needs to be added when a book is added to the collection. It can foll
 
 //longest function of all time? :((
 function createBookCard(book) {
-  console.log(
-    Object.getOwnPropertyNames(book).filter(function (p) {
-      return typeof book[p] === "function";
-    })
-  );
   let bookCard = createDOMelement("div", ["book-card"]);
   let info = createDOMelement("div", ["book-card__info"]);
   let title = createDOMelement("p", ["book-card__info--title"]);
@@ -178,8 +167,9 @@ function removeBookFromDOM(card) {
 
 function toggleReadStatus(book) {
   book.readStatus === false
-    ? book.updateReadStatus(true)
-    : book.updateReadStatus(false);
+    ? (book.readStatus = true)
+    : (book.readStatus = false);
+  updateLocalStorage();
 }
 
 /*__________LOCAL STORAGE__________  */
@@ -212,12 +202,16 @@ function updateLocalStorage() {
 function getLocalStorage() {
   let books = JSON.parse(localStorage.getItem("myLibrary"));
   if (books) {
-    for (let book of books) {
-      let newBook = Object.values(book);
-      addBookToLibrary(...newBook);
-    }
+    addBooksFromStorage(books);
   } else {
     mylibrary = [];
+  }
+}
+
+function addBooksFromStorage(books) {
+  myLibrary = books.map((book) => book);
+  for (book of myLibrary) {
+    createBookCard(book);
   }
 }
 
@@ -225,5 +219,5 @@ function clearStorage() {
   localStorage.clear();
 }
 
-// Let's check storage on-pageload
+// Start here.
 initStorage();
