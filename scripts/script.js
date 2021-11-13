@@ -6,7 +6,9 @@ let libraryIDnumbers = [];
 /* Data Functions
 ___________________________________________*/
 function addBookToLibrary(book) {
-  myLibrary.push(book);
+  let newBook = new Book(...book);
+  myLibrary.push(newBook);
+  createBookCard(newBook);
   updateLocalStorage();
 }
 
@@ -96,10 +98,8 @@ addBookForm.addEventListener("submit", function (e) {
   let pages = inputs[3].value;
   let imageURL = inputs[4].value;
 
-  let newBook = new Book(title, author, description, pages, imageURL);
-
+  let newBook = [title, author, description, pages, imageURL];
   addBookToLibrary(newBook);
-  createBookCard(newBook);
 
   hideModal();
   e.preventDefault();
@@ -212,11 +212,9 @@ function updateLocalStorage() {
 function getLocalStorage() {
   let books = JSON.parse(localStorage.getItem("myLibrary"));
   if (books) {
-    //for each book. create a book object and add to library. this retains the functions required
-    myLibrary = books.map((book) => book);
-    for (let book of myLibrary) {
-      console.log(book);
-      createBookCard(book);
+    for (let book of books) {
+      let newBook = Object.values(book);
+      addBookToLibrary(...newBook);
     }
   } else {
     mylibrary = [];
