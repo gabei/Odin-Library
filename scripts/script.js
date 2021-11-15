@@ -11,8 +11,8 @@ function addBookToLibrary(book) {
 }
 
 function removeBookFromLibrary(book) {
+  // double check that the book ID matches the ID of the book at target index
   let indexToRemove = myLibrary.findIndex((x) => x.id === book.id);
-  //check that the book ID matches the ID of the book at target index
   myLibrary.splice(indexToRemove, 1);
   updateLocalStorage();
 }
@@ -99,13 +99,8 @@ addBookForm.addEventListener("submit", function (e) {
   e.preventDefault();
 });
 
-/* DOM Updates -- Book Cards
+/* Book Cards
 ___________________________________________*/
-/*
-A new card needs to be added when a book is added to the collection. It can follow the same outline as the current cards: book-card__etc...
-*/
-
-//longest function of all time? :((
 function createBookCard(book) {
   let bookCard = createDOMelement("div", ["book-card"]);
   let info = createDOMelement("div", ["book-card__info"]);
@@ -173,7 +168,6 @@ function toggleReadStatus(book) {
 }
 
 /*__________LOCAL STORAGE__________  */
-
 // variation on MDN's storage test function
 function storageIsAvailable() {
   try {
@@ -183,8 +177,8 @@ function storageIsAvailable() {
     localStorage.clear();
     return true;
   } catch (error) {
-    console.error(error);
     console.log("Local Storage is not available");
+    console.error(error);
   }
 }
 
@@ -193,10 +187,6 @@ function initStorage() {
     console.log("Local storage is available.");
     getLocalStorage();
   }
-}
-
-function updateLocalStorage() {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
 function getLocalStorage() {
@@ -215,8 +205,8 @@ function addBooksFromStorage(books) {
   }
 }
 
-function clearStorage() {
-  localStorage.clear();
+function updateLocalStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
 
 // Start here.
