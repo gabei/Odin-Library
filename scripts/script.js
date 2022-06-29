@@ -82,17 +82,12 @@ function hideModal() {
 
 /* Add Book Form Functions
 ___________________________________________*/
+const inputs = [...addBookForm.elements].slice(0, 5);
 addBookForm.addEventListener('submit', function (e) {
-  let inputs = [...addBookForm.elements].slice(0, 5);
-  let title = inputs[0].value;
-  let author = inputs[1].value;
-  let description = inputs[2].value;
-  let pages = inputs[3].value;
-  let imageURL = inputs[4].value;
-
   let formValues = [];
-  inputs.forEach((i) => {
-    formValues.push(i.value);
+
+  inputs.forEach((input) => {
+    formValues.push(input.value);
   });
 
   let newBook = new Book(...formValues);
@@ -106,13 +101,18 @@ addBookForm.addEventListener('submit', function (e) {
 
 /* Form Validation
 ___________________________________________*/
+inputs.forEach((field) => {
+  field.addEventListener('input', validate);
+});
 
-function validate(element) {
-  if (!element.validity.valid) {
-    element.setCustomValidity('This field does not meet the requirements!');
-    element.reportValidity();
+function validate(input) {
+  if (input == 'undefined') return;
+
+  if (!input.validity.valid) {
+    input.setCustomValidity('This field needs filled!');
+    input.reportValidity();
   } else {
-    element.setCustomValidity('');
+    input.setCustomValidity('');
   }
 }
 
