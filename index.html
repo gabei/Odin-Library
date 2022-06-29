@@ -23,22 +23,22 @@
     <div class="modal-card add-book-form__container">
       <section class="book-modal__body"></section>
         <h2 class="book-modal__title">Add to Collection</h2>
-        <form novalidate class="add-book-form__form">
+        <form class="add-book-form__form">
           <div class="field">
             <label class="label" for="title">Title</label>
-            <input id="title" class="input" type="text" placeholder="Title" required>
+            <input id="title" class="input" type="text" placeholder="Title" required minlength="1" maxlength="50">
           </div>
           <div class="field">
             <label class="label" for="author">Author</label>
-            <input id="author" class="input" type="text" placeholder="Author" required>
+            <input id="author" class="input" type="text" placeholder="Author" required minlength="1" maxlength="50">
           </div>
           <div class="field">
             <label class="label" for="description">Description</label>
-            <textarea id="description" class="input is-primary" type="text" placeholder="Description" rows="10" required></textarea>
+            <textarea id="description" class="input is-primary" type="text" placeholder="Description" rows="10" required minlength="1" maxlength="250"></textarea>
           </div>
           <div class="field">
             <label class="label" for="pages">Number of Pages</label>
-            <input id="pages" class="input" type="number" placeholder="# of Pages" required>
+            <input id="pages" class="input" type="number" placeholder="# of Pages" required min="1">
           </div>
           <div class="field">
             <label class="label" for="cover">Cover Image URL</label>

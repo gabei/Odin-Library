@@ -82,15 +82,10 @@ function hideModal() {
 
 /* Add Book Form Functions
 ___________________________________________*/
-const inputs = [...addBookForm.elements].slice(0, 5);
+
 addBookForm.addEventListener('submit', function (e) {
-  let formValues = [];
-
-  inputs.forEach((input) => {
-    formValues.push(input.value);
-  });
-
-  let newBook = new Book(...formValues);
+  const inputs = [...addBookForm.elements].slice(0, 5);
+  let newBook = new Book(...inputs);
 
   addBookToLibrary(newBook);
   createBookCard(newBook);
@@ -98,23 +93,6 @@ addBookForm.addEventListener('submit', function (e) {
   hideModal();
   e.preventDefault();
 });
-
-/* Form Validation
-___________________________________________*/
-inputs.forEach((field) => {
-  field.addEventListener('input', validate);
-});
-
-function validate(input) {
-  if (input == 'undefined') return;
-
-  if (!input.validity.valid) {
-    input.setCustomValidity('This field needs filled!');
-    input.reportValidity();
-  } else {
-    input.setCustomValidity('');
-  }
-}
 
 /* Book Cards
 ___________________________________________*/
